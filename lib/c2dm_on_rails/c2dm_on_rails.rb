@@ -3,11 +3,15 @@ require 'gdata'
 require 'uri'
 require 'rails'
 
+module C2dm # :nodoc:
+
 class C2dmRailtie < Rails::Railtie
    initializer "load c2dm config" do
 	rails_root = File.join(FileUtils.pwd, 'rails_root')
 
 	rails_root = Rails.root
+
+	puts "intiialized with #{rails_root}"
 
 	rails_env = 'development'
 	if defined?(Rails)
@@ -31,7 +35,6 @@ class C2dmRailtie < Rails::Railtie
    end
 end
 
-module C2dm # :nodoc:
   
   module Errors # :nodoc:
     

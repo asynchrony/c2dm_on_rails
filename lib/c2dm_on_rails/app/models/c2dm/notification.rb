@@ -47,6 +47,7 @@ class C2dm::Notification < C2dm::Base
       unless notifications.nil? || notifications.empty?
         C2dm::Connection.open do |token|
           notifications.each do |noty|
+	   puts noty.to_s
 	   if noty.sent_at.nil?
             response = C2dm::Connection.send_notification(noty, token)
             if response[:code] == 200
