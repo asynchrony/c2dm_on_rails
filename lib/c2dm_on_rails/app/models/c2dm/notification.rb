@@ -1,5 +1,6 @@
 require 'net/http'
 require 'uri'
+require 'action_view'
 
 # Represents the message you wish to send. 
 # An C2dm::Notification belongs to an C2dm::Device.
@@ -18,7 +19,13 @@ require 'uri'
 class C2dm::Notification < C2dm::Base
   include ::ActionView::Helpers::TextHelper
   extend ::ActionView::Helpers::TextHelper
-  serialize :data
+  include Mongoid:Document
+  include ActiveModel::Validations
+
+  field :data, :type => Hash
+  field :collapse_key, :type => String
+  field :delay_while_idle, :type => Boolean
+  field :sent_at, :type => Date
   
   belongs_to :device, :class_name => 'C2dm::Device'
   

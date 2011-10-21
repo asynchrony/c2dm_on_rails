@@ -9,6 +9,11 @@
 # Example:
 #   Device.create(:registration_id => 'FOOBAR')
 class C2dm::Device < C2dm::Base
+  include Mongoid:ocument
+  include ActiveModel::Validations
+
+  field :last_registered_at, :type => Date
+  field :registration_id, :type => String
   
   has_many :notifications, :class_name => 'C2dm::Notification', :dependent => :destroy
   
