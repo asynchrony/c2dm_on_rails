@@ -9,7 +9,7 @@
 # Example:
 #   Device.create(:registration_id => 'FOOBAR')
 class C2dm::Device < C2dm::Base
-  include Mongoid:ocument
+  include Mongoid::Document
   include ActiveModel::Validations
 
   field :last_registered_at, :type => Date

@@ -19,7 +19,7 @@ require 'action_view'
 class C2dm::Notification < C2dm::Base
   include ::ActionView::Helpers::TextHelper
   extend ::ActionView::Helpers::TextHelper
-  include Mongoid:Document
+  include Mongoid::Document
   include ActiveModel::Validations
 
   field :data, :type => Hash
