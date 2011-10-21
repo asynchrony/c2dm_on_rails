@@ -14,7 +14,7 @@ if defined?(Rails.env)
 end
 
 begin 
-  APP_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/c2dm.yml")[rails_env]
+  APP_CONFIG = YAML.load_file("#{rails_root}/config/c2dm.yml")[rails_env]
 rescue => ex
   raise C2dm::Errors.ConfigFileNotFound.new(ex.message)
 end
