@@ -1,41 +1,38 @@
-require 'configatron'
 require 'gdata'
 require 'uri'
 require 'rails'
 
 module C2dm # :nodoc:
 
-class C2dmRailtie < Rails::Railtie
-   initializer "load c2dm config" do
-	rails_root = File.join(FileUtils.pwd, 'rails_root')
+  class C2dmRailtie < Rails::Railtie
+    initializer "load c2dm config" do
+      if defined?(Rails)
+        rails_env = Rails.env
+        rails_root = Rails.root
+      else
+        rails_env = 'development'
+        rails_root = File.join(FileUtils.pwd, 'rails_root')
+      end
 
-	rails_root = Rails.root
+      begin
+        APP_CONFIG = YAML.load_file("#{rails_root}/config/c2dm.yml")[rails_env]
+      rescue => ex
+        raise ex
+      end
 
-	puts "intiialized with #{rails_root}"
+      begin
+        C2DM_API_URL = URI.parse('https://android.apis.google.com/c2dm/send') unless defined?(C2DM_API_URL)
+        C2DM_USERNAME = APP_CONFIG['username'] unless defined?(C2DM_USERNAME)
+        C2DM_PASSWORD = APP_CONFIG['password'] unless defined?(C2DM_PASSWORD)
+        C2DM_APP_NAME = APP_CONFIG['app_name'] unless defined?(C2DM_APP_NAME)
+      rescue => ex
+        raise C2dm::Errors.ConfigFileMissingAttributes.new(ex.message)
+      end
 
-	rails_env = 'development'
-	if defined?(Rails)
-	  rails_env = Rails.env
-	end
+      puts "initialized with #{rails_root}"
+    end
+  end
 
-	begin 
-	  APP_CONFIG = YAML.load_file("#{rails_root}/config/c2dm.yml")[rails_env]
-	rescue => ex
-	  raise ex
-	end
-
-	begin
-	  configatron.c2dm.api_url = URI.parse('https://android.apis.google.com/c2dm/send')
-	  configatron.c2dm.username = APP_CONFIG['username']
-	  configatron.c2dm.password = APP_CONFIG['password']
-	  configatron.c2dm.app_name = APP_CONFIG['app_name']
-	rescue => ex
-	  raise ex
-	end
-   end
-end
-
-  
   module Errors # :nodoc:
     
     # The payload of the message is too big, the limit is currently 1024

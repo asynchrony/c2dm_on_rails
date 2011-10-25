@@ -15,7 +15,7 @@ module C2dm
 
         data = data + "&delay_while_idle" if noty.delay_while_idle
 
-        url = configatron.c2dm.api_url
+        url = C2DM_API_URL
         http = Net::HTTP.new(url.host, url.port)
         http.use_ssl = true
 	http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -27,9 +27,9 @@ module C2dm
 
       def open
         client_login_handler = GData::Auth::ClientLogin.new('ac2dm', :account_type => 'HOSTED_OR_GOOGLE')
-        token = client_login_handler.get_token(configatron.c2dm.username,
-                                               configatron.c2dm.password,
-                                               configatron.c2dm.app_name)
+        token = client_login_handler.get_token(C2DM_USERNAME,
+                                               C2DM_PASSWORD,
+                                               C2DM_APP_NAME)
 
         yield token
       end
