@@ -8,7 +8,8 @@ Gem::Specification.new do |s|
   s.authors = ['Julius de Bruijn', 'Asynchrony Solutions T1D Team']
   s.email = 't1d@asolutions.com'
   s.summary = 'Android push notifications on Rails. (Mongoid version)'
-  s.description = 'Android push notifications on Rails. (Mongoid version)'
+  s.description = 'Android push notifications on Rails. (Mongoid version)' +
+          'Requires an account on Android Cloud to Device Messaging service (http://code.google.com/android/c2dm/)'
 
   s.rubygems_version = '1.8.6'
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
