@@ -21,10 +21,10 @@ module C2dm # :nodoc:
       end
 
       begin
-        C2DM_API_URL = URI.parse('https://android.apis.google.com/c2dm/send') unless defined?(C2DM_API_URL)
-        C2DM_USERNAME = APP_CONFIG['username'] unless defined?(C2DM_USERNAME)
-        C2DM_PASSWORD = APP_CONFIG['password'] unless defined?(C2DM_PASSWORD)
-        C2DM_APP_NAME = APP_CONFIG['app_name'] unless defined?(C2DM_APP_NAME)
+        ::C2dm::API_URL = URI.parse('https://android.apis.google.com/c2dm/send') unless defined?(::C2dm::API_URL)
+        ::C2dm::USERNAME = APP_CONFIG['username'] unless defined?(::C2dm::USERNAME)
+        ::C2dm::PASSWORD = APP_CONFIG['password'] unless defined?(::C2dm::PASSWORD)
+        ::C2dm::APP_NAME = APP_CONFIG['app_name'] unless defined?(::C2dm::APP_NAME)
       rescue => ex
         raise C2dm::Errors.ConfigFileMissingAttributes.new(ex.message)
       end
