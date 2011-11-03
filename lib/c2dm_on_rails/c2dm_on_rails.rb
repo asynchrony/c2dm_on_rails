@@ -28,8 +28,6 @@ module C2dm # :nodoc:
       rescue => ex
         raise C2dm::Errors.ConfigFileMissingAttributes.new(ex.message)
       end
-
-      puts "initialized with #{rails_root}"
     end
   end
 
