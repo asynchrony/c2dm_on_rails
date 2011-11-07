@@ -49,6 +49,7 @@ class C2dm::Notification < C2dm::Base
           notifications.each do |noty|
 	   if noty.sent_at.nil?
             response = C2dm::Connection.send_notification(noty, token)
+            logger.info("C2DM connection result: #{response[:code]} - #{response[:message]}")
             if response[:code] == 200
               case response[:message]
               when "Error=QuotaExceeded"
