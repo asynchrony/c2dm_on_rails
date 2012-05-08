@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'c2dm_on_rails'
   s.rubyforge_project = 'c2dm_on_rails'
-  s.version = '0.4.2.asynchrony.6'
+  s.version = '0.4.2.asynchrony.7'
   s.date = Date.today
 
   s.homepage = 'http://github.com/asynchrony/c2dm_on_rails'
